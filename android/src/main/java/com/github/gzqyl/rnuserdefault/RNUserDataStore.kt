@@ -1,30 +1,18 @@
 package com.github.gzqyl.rnuserdefault
 
-import android.app.Application
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import com.facebook.react.bridge.ReactApplicationContext
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.runBlocking
 
-class RNUserDataStore: Application() {
+val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "mlkit_langcode_setting")
 
-    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "mlkit_langcode_settings")
-
-    override fun onCreate() {
-        super.onCreate()
-        appContext = applicationContext
-    }
-
-    companion object {
-
-        lateinit  var appContext: Context
-
-    }
-    
+class RNUserDataStore(private val reactContext: ReactApplicationContext) {
 
     val langKey = stringPreferencesKey("mlkit_lang_code")
 
@@ -32,7 +20,7 @@ class RNUserDataStore: Application() {
 
         return runBlocking{
 
-            appContext.dataStore.data.firstOrNull()?.get(langKey) ?: "en"
+            reactContext.applicationContext.dataStore.data.firstOrNull()?.get(langKey) ?: "en"
 
         }
 
@@ -42,7 +30,7 @@ class RNUserDataStore: Application() {
 
         runBlocking{
 
-            appContext.dataStore.edit { preferences ->
+            reactContext.applicationContext.dataStore.edit { preferences ->
                 preferences[langKey] = langCode
             }
 
@@ -54,7 +42,7 @@ class RNUserDataStore: Application() {
 
         return runBlocking{
 
-            val langCode = appContext.dataStore.data.firstOrNull()?.get(langKey)
+            val langCode = reactContext.applicationContext.dataStore.data.firstOrNull()?.get(langKey)
 
             langCode != null
 
