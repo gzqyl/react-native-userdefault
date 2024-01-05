@@ -10,6 +10,7 @@
 #endif
 
 #import <React/RCTBridgeModule.h>
+#import "react_native_userdefault-Swift.h"
 
 @interface RNUserDefault : NSObject <RCTBridgeModule>
 

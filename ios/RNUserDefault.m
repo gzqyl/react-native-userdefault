@@ -8,7 +8,6 @@
 #import <Foundation/Foundation.h>
 #import "RNUserDefault.h"
 #import <React/RCTLog.h>
-#import "react_native_userdefault-Swift.h"
 
 @implementation RNUserDefault
 
