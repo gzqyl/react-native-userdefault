@@ -10,8 +10,14 @@
 #endif
 
 #import <React/RCTBridgeModule.h>
-#import "react_native_userdefault-Swift.h"
 
 @interface RNUserDefault : NSObject <RCTBridgeModule>
+
++(NSString *) getMLKitLangSwift;
+
++(void) setMLkitLang: (NSString *) langCode;
+
++(BOOL) isLangSetted;
+
 
 @end

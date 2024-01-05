@@ -1,6 +1,6 @@
 {
   "name": "@gzqyl/react-native-userdefault",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "For MLKIT Local Lang Settings",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
